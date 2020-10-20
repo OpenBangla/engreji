@@ -1,25 +1,43 @@
 
 pub fn generate_regex(word: &str) -> String {
     let mut output = String::with_capacity(word.len());
+    output.push('^');
 
-    for character in word.chars() {
+    let mut chars = word.chars().peekable();
+    while let Some(character) = chars.next() {
         match character.to_ascii_lowercase() {
             'a' => output.push_str("(অ্যা|্যা|া)"),
             'c' => output.push_str("(ক)"),
             'd' => output.push_str("(ড)"),
-            'e' => output.push_str("(ে)"),
+            'e' => output.push_str("(ে|ই)"),
             'g' => output.push_str("(গ|জ)"),
+            'h' => output.push_str("(হ)?"),
+            'i' => output.push_str("(ই|ি)"),
             'l' => output.push_str("(ল)"),
-            'h' => output.push_str("(হ)"),
             'm' => output.push_str("(ম)?"),
-            'n' => output.push_str("(ন)"),
+            'n' => {
+                // ng => ং
+                if let Some(next) = chars.peek() {
+                    if next.to_ascii_lowercase() == 'g' {
+                        output.push_str("ং");
+                        // Eat the 'g' character.
+                        chars.next();
+                        continue;
+                    }
+                }
+                output.push_str("(ন)");
+            }
             'o' => output.push_str("(ও|ো)?"),
+            'p' => output.push_str("প"),
+            'r' => output.push_str("(র|্র)"),
+            's' => output.push_str("(শ|স)"),
             _ => ()
         }
 
         // Add optional Hashanta
         output.push_str("্?");
     }
+    output.push('$');
 
     output
 }
@@ -37,5 +55,11 @@ mod tests {
 
         regex = Regex::new(&generate_regex("command")).unwrap();
         assert!(regex.is_match("কমান্ড"));
+
+        regex = Regex::new(&generate_regex("english")).unwrap();
+        assert!(regex.is_match("ইংলিশ"));
+
+        regex = Regex::new(&generate_regex("programming")).unwrap();
+        assert!(regex.is_match("প্রোগ্রামিং"));
     }
 }
