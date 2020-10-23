@@ -27,7 +27,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ক)");
+                output.push_str("(ক|স)");
             }
             'd' => output.push_str("(ড)"),
             'e' => output.push_str("(ে|ি|ই)?"),
@@ -36,7 +36,7 @@ pub fn generate_regex(word: &str) -> String {
             'h' => output.push_str("(হ)?"),
             'i' => output.push_str("(ই|ি)"),
             'k' => output.push_str("(ক)"),
-            'l' => output.push_str("(ল)"),
+            'l' => output.push_str("ল?"),
             'm' => output.push_str("(ম)?"),
             'n' => {
                 // ng -> ং
@@ -51,7 +51,19 @@ pub fn generate_regex(word: &str) -> String {
                 }
                 output.push_str("(ন)");
             }
-            'o' => output.push_str("(ও|ো)?"),
+            'o' => {
+                // ou
+                if let Some(next) = chars.peek() {
+                    if next.to_ascii_lowercase() == 'u' {
+                        output.push_str("(াউ|আউ|া|য়া)");
+                        // Eat the 'u' character.
+                        chars.next();
+                        index += 2;
+                        continue;
+                    }
+                }
+                output.push_str("(ও|ো)?");
+            }
             'p' => output.push_str("প"),
             'q' => output.push_str("ক"),
             'r' => output.push_str("(র|্র|র্)"),
@@ -116,6 +128,9 @@ mod tests {
         regex = Regex::new(&generate_regex("attribute")).unwrap();
         assert!(regex.is_match("অ্যাট্রিবিউট"));
 
+        regex = Regex::new(&generate_regex("contribute")).unwrap();
+        assert!(regex.is_match("কন্ট্রিবিউট"));
+
         regex = Regex::new(&generate_regex("package")).unwrap();
         assert!(regex.is_match("প্যাকেজ"));
 
@@ -130,5 +145,17 @@ mod tests {
 
         regex = Regex::new(&generate_regex("clock")).unwrap();
         assert!(regex.is_match("ক্লক"));
+
+        regex = Regex::new(&generate_regex("out")).unwrap();
+        assert!(regex.is_match("আউট"));
+
+        regex = Regex::new(&generate_regex("councillor")).unwrap();
+        assert!(regex.is_match("কাউন্সিলর"));
+
+        regex = Regex::new(&generate_regex("double")).unwrap();
+        assert!(regex.is_match("ডাবল"));
+
+        regex = Regex::new(&generate_regex("serious")).unwrap();
+        assert!(regex.is_match("সিরিয়াস"));
     }
 }
