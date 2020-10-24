@@ -30,11 +30,12 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ক|স)");
             }
             'd' => output.push_str("(ড)"),
-            'e' => output.push_str("(ে|ি|ই)?"),
+            'e' => output.push_str("(ে|ি|া|ই)?"),
             'f' => output.push_str("ফ"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
             'i' => output.push_str("(ই|ি)"),
+            'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
             'l' => output.push_str("ল?"),
             'm' => output.push_str("(ম)?"),
@@ -62,9 +63,9 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ও|ো)?");
+                output.push_str("(ও|ো|অ)?");
             }
-            'p' => output.push_str("প"),
+            'p' => output.push_str("প?"),
             'q' => output.push_str("ক"),
             'r' => output.push_str("(র|্র|র্)"),
             's' => output.push_str("(শ|স)?"),
@@ -84,6 +85,9 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ট)?");
             }
             'u' => output.push_str("(ু|িউ|া)"),
+            'v' => output.push_str("ভ?"),
+            'w' => output.push_str("(ও|উ)?"),
+            'y' => output.push_str("(ি|ই)"),
             _ => ()
         }
 
