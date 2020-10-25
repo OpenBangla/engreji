@@ -2039,13 +2039,6 @@ fn test_word_publish() {
 }
 
 #[test]
-fn test_word_manto() {
-    let regex = generate_regex("manto");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("মানত"));
-}
-
-#[test]
 fn test_word_conductor() {
     let regex = generate_regex("conductor");
     let matcher = Regex::new(&regex).unwrap();
