@@ -3,27 +3,25 @@ pub fn generate_regex(word: &str) -> String {
     let mut output = String::with_capacity(word.len());
     output.push('^');
 
-    let mut chars = word.chars().peekable();
-    let mut index = 0;
-    while let Some(character) = chars.next() {
+    let mut chars = word.char_indices().peekable();
+    while let Some((index, character)) = chars.next() {
         match character.to_ascii_lowercase() {
             'a' => output.push_str("(অ্যা|্যা|া|ে|য়ে)?"),
             'b' => output.push_str("ব?"),
             'c' => {
-                if let Some(next) = chars.peek() {
+                if let Some((_, next)) = chars.peek() {
+                    let next = next.to_ascii_lowercase();
                     // ck -> ক
-                    if next.to_ascii_lowercase() == 'k' {
+                    if next == 'k' {
                         output.push_str("ক");
                         // Eat the 'k' character.
                         chars.next();
-                        index += 2;
                         continue;
-                    } else if next.to_ascii_lowercase() == 'h' {
+                    } else if next == 'h' {
                         // ch -> চ
                         output.push_str("চ|ক");
                         // Eat the 'h' character.
                         chars.next();
-                        index += 2;
                         continue;
                     }
                 }
@@ -41,33 +39,30 @@ pub fn generate_regex(word: &str) -> String {
             'm' => output.push_str("(ম)?"),
             'n' => {
                 // ng -> ং, ঙ্গ
-                if let Some(next) = chars.peek() {
+                if let Some((_, next)) = chars.peek() {
                     if next.to_ascii_lowercase() == 'g' {
                         output.push_str("(ং|ঙ্গ)");
                         // Eat the 'g' character.
                         chars.next();
-                        index += 2;
                         continue;
                     }
                 }
                 output.push_str("(ন)");
             }
             'o' => {
-                if let Some(next) = chars.peek() {
+                if let Some((_, next)) = chars.peek() {
                     let next = next.to_ascii_lowercase();
                     // ou
                     if next == 'u' {
                         output.push_str("(াউ|আউ|া|য়া)");
                         // Eat the 'u' character.
                         chars.next();
-                        index += 2;
                         continue;
                     } else if next == 'w' {
                         // ow
                         output.push_str("(াউ)");
                         // Eat the 'w' character.
                         chars.next();
-                        index += 2;
                         continue;
                     }
                 }
@@ -86,7 +81,6 @@ pub fn generate_regex(word: &str) -> String {
                         chars.next();
                         chars.next();
                         chars.next();
-                        index += 4;
                         continue;
                     }
                 }
@@ -102,7 +96,6 @@ pub fn generate_regex(word: &str) -> String {
 
         // Add optional Hashanta
         output.push_str("্?");
-        index += 1;
     }
     output.push('$');
 
