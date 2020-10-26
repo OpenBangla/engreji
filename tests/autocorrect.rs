@@ -3897,7 +3897,7 @@ fn test_word_camera() {
 fn test_word_television() {
     let regex = generate_regex("television");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("টেলিভিশান"));
+    assert!(matcher.is_match("টেলিভিশন"));
 }
 
 #[test]
@@ -4072,7 +4072,7 @@ fn test_word_unit() {
 fn test_word_extension() {
     let regex = generate_regex("extension");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এক্সটেন্সান"));
+    assert!(matcher.is_match("এক্সটেনশন"));
 }
 
 #[test]
@@ -4912,7 +4912,7 @@ fn test_word_pharmacology() {
 fn test_word_dictionary() {
     let regex = generate_regex("dictionary");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ডিকশনারী"));
+    assert!(matcher.is_match("ডিকশনারি"));
 }
 
 #[test]
@@ -5052,7 +5052,7 @@ fn test_word_character() {
 fn test_word_session() {
     let regex = generate_regex("session");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সেশান"));
+    assert!(matcher.is_match("সেশন"));
 }
 
 #[test]
@@ -6137,7 +6137,7 @@ fn test_word_dell() {
 fn test_word_receptionist() {
     let regex = generate_regex("receptionist");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("রিসেপশানিস্ট"));
+    assert!(matcher.is_match("রিসেপশনিস্ট"));
 }
 
 #[test]

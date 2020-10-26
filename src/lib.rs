@@ -6,7 +6,7 @@ pub fn generate_regex(word: &str) -> String {
     let mut chars = word.char_indices().peekable();
     while let Some((index, character)) = chars.next() {
         match character.to_ascii_lowercase() {
-            'a' => output.push_str("(অ্যা|্যা|া|ে|য়ে)?"),
+            'a' => output.push_str("(আ|অ্যা|্যা|া|ে|অ|য়ে|য়া)?"),
             'b' => output.push_str("ব?"),
             'c' => {
                 if let Some((_, next)) = chars.peek() {
@@ -28,26 +28,33 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ক|স)?");
             }
             'd' => output.push_str("(ড)?"),
-            'e' => output.push_str("(ে|ি|া|ই)?"),
-            'f' => output.push_str("ফ"),
+            'e' => output.push_str("(ে|ি|া|ই|এ)?"),
+            'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
-            'i' => output.push_str("(ই|ি|া|াই)"),
+            'i' => output.push_str("(ই|ি|া|াই|ে)"),
             'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
             'l' => output.push_str("ল?"),
             'm' => output.push_str("(ম)?"),
             'n' => {
-                // ng -> ং, ঙ্গ
                 if let Some((_, next)) = chars.peek() {
-                    if next.to_ascii_lowercase() == 'g' {
+                    let next = next.to_ascii_lowercase();
+                    // ng -> ং, ঙ্গ
+                    if next == 'g' {
                         output.push_str("(ং|ঙ্গ)");
                         // Eat the 'g' character.
                         chars.next();
                         continue;
+                    } else if next == 'k' {
+                        // nk -> ংক, ঙ্ক
+                        output.push_str("(ংক|ঙ্ক)");
+                        // Eat the 'k' character.
+                        chars.next();
+                        continue;
                     }
                 }
-                output.push_str("(ন)");
+                output.push_str("ন?");
             }
             'o' => {
                 if let Some((_, next)) = chars.peek() {
@@ -66,13 +73,46 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ও|ো|অ|য়ো)?");
+                output.push_str("(ও|ো|অ|য়|য়ো|া|ু)?");
             }
-            'p' => output.push_str("প?"),
+            'p' => {
+                // ph -> ফ
+                if let Some((_, next)) = chars.peek() {
+                    if next.to_ascii_lowercase() == 'h' {
+                        output.push_str("ফ");
+                        // Eat the 'h' character.
+                        chars.next();
+                        continue;
+                    }
+                }
+                output.push_str("প?");
+            }
             'q' => output.push_str("ক"),
-            'r' => output.push_str("(র|্র|র্)"),
-            's' => output.push_str("(শ|স|জ)?"),
+            'r' => output.push_str("(র|্র|র্|র\u{200d})"),
+            's' => {
+                // sion -> শন, সন
+                if let Some(next) = word.get(index..=index+3) {
+                    if next.to_ascii_lowercase() == "sion" {
+                        output.push_str("(শন|সন)");
+                        // Eat the 'ion' characters.
+                        chars.next();
+                        chars.next();
+                        chars.next();
+                        continue;
+                    }
+                }
+                output.push_str("(শ|স|জ)?");
+            }
             't' => {
+                // th -> থ
+                if let Some((_, next)) = chars.peek() {
+                    if next.to_ascii_lowercase() == 'h' {
+                        output.push_str("(থ|দ)");
+                        // Eat the 'h' character.
+                        chars.next();
+                        continue;
+                    }
+                }
                 // tion -> শন
                 if let Some(next) = word.get(index..=index+3) {
                     if next.to_ascii_lowercase() == "tion" {
@@ -86,11 +126,12 @@ pub fn generate_regex(word: &str) -> String {
                 }
                 output.push_str("(ট)?");
             }
-            'u' => output.push_str("(ু|িউ|া)"),
+            'u' => output.push_str("(ু|িউ|ইউ|া|আ|য়া)?"),
             'v' => output.push_str("ভ?"),
             'w' => output.push_str("(ও|উ)?"),
             'x' => output.push_str("(ক্স|জ)?"),
-            'y' => output.push_str("(ি|ই)"),
+            'y' => output.push_str("(ি|ই|াই)"),
+            'z' => output.push_str("জ?"),
             _ => ()
         }
 
