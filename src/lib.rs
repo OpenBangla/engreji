@@ -6,7 +6,7 @@ pub fn generate_regex(word: &str) -> String {
     let mut chars = word.char_indices().peekable();
     while let Some((index, character)) = chars.next() {
         match character.to_ascii_lowercase() {
-            'a' => output.push_str("(আ|অ্যা|্যা|া|ে|অ|য়ে|য়া)?"),
+            'a' => output.push_str("(আ|অ্যা|্যা|া|ে|অ|য়ে|য়া|এ)?"),
             'b' => output.push_str("ব?"),
             'c' => {
                 if let Some((_, next)) = chars.peek() {
@@ -28,21 +28,32 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ক|স)?");
             }
             'd' => output.push_str("(ড)?"),
-            'e' => output.push_str("(ে|ি|া|ই|এ)?"),
+            'e' => output.push_str("(ে|ি|া|ই|এ|য়)?"),
             'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
-            'i' => output.push_str("(ই|ি|া|াই|ে)"),
+            'i' => output.push_str("(ই|ি|া|াই|ে)?"),
             'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
-            'l' => output.push_str("ল?"),
+            'l' => {
+                // le
+                if let Some((_, next)) = chars.peek() {
+                    if next.to_ascii_lowercase() == 'e' {
+                        output.push_str("(ল|লে|লি|েল)");
+                        // Eat the 'e' character.
+                        chars.next();
+                        continue;
+                    }
+                }
+                output.push_str("ল?");
+            }
             'm' => output.push_str("(ম)?"),
             'n' => {
                 if let Some((_, next)) = chars.peek() {
                     let next = next.to_ascii_lowercase();
-                    // ng -> ং, ঙ্গ
+                    // ng -> ং, ঙ্গ, ঞ্জ
                     if next == 'g' {
-                        output.push_str("(ং|ঙ্গ)");
+                        output.push_str("(ং|ঙ্গ|ঞ্জ)");
                         // Eat the 'g' character.
                         chars.next();
                         continue;
@@ -88,7 +99,7 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("প?");
             }
             'q' => output.push_str("ক"),
-            'r' => output.push_str("(র|্র|র্|র\u{200d})"),
+            'r' => output.push_str("(র|্র|র্|র\u{200d}|ার)"),
             's' => {
                 // sion -> শন, সন
                 if let Some(next) = word.get(index..=index+3) {
@@ -124,13 +135,13 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ট)?");
+                output.push_str("(ট|চ)?");
             }
             'u' => output.push_str("(ু|িউ|ইউ|া|আ|য়া)?"),
             'v' => output.push_str("ভ?"),
             'w' => output.push_str("(ও|উ)?"),
             'x' => output.push_str("(ক্স|জ)?"),
-            'y' => output.push_str("(ি|ই|াই)"),
+            'y' => output.push_str("(ি|ই|াই|ে)"),
             'z' => output.push_str("জ?"),
             _ => ()
         }

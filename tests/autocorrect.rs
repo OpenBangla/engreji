@@ -2189,7 +2189,7 @@ fn test_word_office() {
 fn test_word_cable() {
     let regex = generate_regex("cable");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কেব্‌ল"));
+    assert!(matcher.is_match("ক্যাবল"));
 }
 
 #[test]
@@ -2623,7 +2623,7 @@ fn test_word_airway() {
 fn test_word_doctor() {
     let regex = generate_regex("doctor");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ডাক্তার"));
+    assert!(matcher.is_match("ডক্টর"));
 }
 
 #[test]
