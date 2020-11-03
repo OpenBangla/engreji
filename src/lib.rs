@@ -25,21 +25,21 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ক|স)?");
+                output.push_str("(ক|স|শ)?");
             }
             'd' => output.push_str("(ড)?"),
             'e' => output.push_str("(ে|ি|া|ই|এ|য়)?"),
             'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
-            'i' => output.push_str("(ই|ি|া|াই|ে)?"),
+            'i' => output.push_str("(ই|ি|া|াই|ে|আই|য়াই)?"),
             'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
             'l' => {
                 // le
                 if let Some((_, next)) = chars.peek() {
                     if next.to_ascii_lowercase() == 'e' {
-                        output.push_str("(ল|লে|লি|েল)");
+                        output.push_str("(ল|লে|লি|েল|িল)");
                         // Eat the 'e' character.
                         chars.next();
                         continue;
@@ -57,6 +57,11 @@ pub fn generate_regex(word: &str) -> String {
                         // Eat the 'g' character.
                         chars.next();
                         continue;
+                    } else if next == 'j' {
+                        output.push_str("ঞ্জ");
+                        // Eat the 'j' character.
+                        chars.next();
+                        continue;
                     } else if next == 'k' {
                         // nk -> ংক, ঙ্ক
                         output.push_str("(ংক|ঙ্ক)");
@@ -72,7 +77,7 @@ pub fn generate_regex(word: &str) -> String {
                     let next = next.to_ascii_lowercase();
                     // ou
                     if next == 'u' {
-                        output.push_str("(াউ|আউ|া|য়া)");
+                        output.push_str("(াউ|আউ|া|ো|য়া|ু)");
                         // Eat the 'u' character.
                         chars.next();
                         continue;
@@ -99,7 +104,7 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("প?");
             }
             'q' => output.push_str("ক"),
-            'r' => output.push_str("(র|্র|র্|র\u{200d}|ার)"),
+            'r' => output.push_str("(র|্র|র্|র\u{200d}|ার)?"),
             's' => {
                 // sion -> শন, সন
                 if let Some(next) = word.get(index..=index+3) {
