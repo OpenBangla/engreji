@@ -6,7 +6,13 @@ pub fn generate_regex(word: &str) -> String {
     let mut chars = word.char_indices().peekable();
     while let Some((index, character)) = chars.next() {
         match character.to_ascii_lowercase() {
-            'a' => output.push_str("(আ|অ্যা|্যা|া|ে|অ|য়ে|য়া|এ)?"),
+            'a' => {
+                if index == 0 {
+                    output.push_str("(আ|অ্যা|অ|এ)?");
+                    continue;
+                }
+                output.push_str("(\u{9cd}য\u{9be}|\u{9be}|ে|য়ে|য়\u{9be}|েই)?");
+            }
             'b' => output.push_str("ব?"),
             'c' => {
                 if let Some((_, next)) = chars.peek() {
@@ -28,7 +34,13 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ক|স|শ)?");
             }
             'd' => output.push_str("(ড)?"),
-            'e' => output.push_str("(ে|ি|া|ই|এ|য়)?"),
+            'e' => {
+                // earth -> আর্থ
+                if index == 0 {
+                    output.push_str("(আ)?");
+                }
+                output.push_str("(ে|ি|া|ই|এ|য়)?");
+            }
             'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
@@ -83,7 +95,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     } else if next == 'w' {
                         // ow
-                        output.push_str("(াউ)");
+                        output.push_str("(াউ|ো)?");
                         // Eat the 'w' character.
                         chars.next();
                         continue;
@@ -152,7 +164,7 @@ pub fn generate_regex(word: &str) -> String {
         }
 
         // Add optional Hashanta
-        output.push_str("্?");
+        output.push_str("(\u{9cd}|\u{9cd}য)?");
     }
     output.push('$');
 

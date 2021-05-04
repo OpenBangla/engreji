@@ -652,19 +652,6 @@ fn test_word_manager() {
     assert!(matcher.is_match("ম্যানেজার"));
 }
 
-#[test]
-fn test_word_saudi() {
-    let regex = generate_regex("saudi");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সৌদি"));
-}
-
-#[test]
-fn test_word_gandhi() {
-    let regex = generate_regex("gandhi");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("গান্ধী"));
-}
 
 #[test]
 fn test_word_professor() {
@@ -1258,7 +1245,7 @@ fn test_word_lab() {
 fn test_word_muffler() {
     let regex = generate_regex("muffler");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("মাফ্‌লার"));
+    assert!(matcher.is_match("মাফলার"));
 }
 
 #[test]
@@ -1570,13 +1557,6 @@ fn test_word_germany() {
 }
 
 #[test]
-fn test_word_castro() {
-    let regex = generate_regex("castro");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কাস্ত্রো"));
-}
-
-#[test]
 fn test_word_dutch() {
     let regex = generate_regex("dutch");
     let matcher = Regex::new(&regex).unwrap();
@@ -1644,13 +1624,6 @@ fn test_word_media() {
     let regex = generate_regex("media");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("মিডিয়া"));
-}
-
-#[test]
-fn test_word_mm() {
-    let regex = generate_regex("mm");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("মিমি."));
 }
 
 #[test]
@@ -1966,13 +1939,6 @@ fn test_word_reliance() {
     let regex = generate_regex("reliance");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("রিলায়েন্স"));
-}
-
-#[test]
-fn test_word_ms() {
-    let regex = generate_regex("ms");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এমএস"));
 }
 
 #[test]
@@ -2606,13 +2572,6 @@ fn test_word_tools() {
 }
 
 #[test]
-fn test_word_ml() {
-    let regex = generate_regex("ml");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("মিলি."));
-}
-
-#[test]
 fn test_word_sports() {
     let regex = generate_regex("sports");
     let matcher = Regex::new(&regex).unwrap();
@@ -3086,13 +3045,6 @@ fn test_word_hitler() {
     let regex = generate_regex("hitler");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("হিটলার"));
-}
-
-#[test]
-fn test_word_mb() {
-    let regex = generate_regex("mb");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এমবি"));
 }
 
 #[test]
@@ -3803,13 +3755,6 @@ fn test_word_electronic() {
 }
 
 #[test]
-fn test_word_ups() {
-    let regex = generate_regex("ups");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ইউপিএস"));
-}
-
-#[test]
 fn test_word_standard() {
     let regex = generate_regex("standard");
     let matcher = Regex::new(&regex).unwrap();
@@ -3911,7 +3856,7 @@ fn test_word_time() {
 fn test_word_feed() {
     let regex = generate_regex("feed");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ফীড"));
+    assert!(matcher.is_match("ফিড"));
 }
 
 #[test]
@@ -5140,13 +5085,6 @@ fn test_word_plate() {
 }
 
 #[test]
-fn test_word_rong() {
-    let regex = generate_regex("rong");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("রঙ"));
-}
-
-#[test]
 fn test_word_emirates() {
     let regex = generate_regex("emirates");
     let matcher = Regex::new(&regex).unwrap();
@@ -5277,13 +5215,6 @@ fn test_word_remote() {
     let regex = generate_regex("remote");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("রিমোট"));
-}
-
-#[test]
-fn test_word_rajarshi() {
-    let regex = generate_regex("rajarshi");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("রাজর্ষি"));
 }
 
 #[test]
