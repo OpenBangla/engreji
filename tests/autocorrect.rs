@@ -292,7 +292,7 @@ fn test_word_design() {
 fn test_word_windscreen() {
     let regex = generate_regex("windscreen");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("উইন্ডস্ক্রীন"));
+    assert!(matcher.is_match("উইন্ডস্ক্রিন"));
 }
 
 #[test]

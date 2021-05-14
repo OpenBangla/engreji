@@ -95,7 +95,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     } else if next == 'w' {
                         // ow
-                        output.push_str("(াউ|ো)?");
+                        output.push_str("(াউ|ো|য়াও)?");
                         // Eat the 'w' character.
                         chars.next();
                         continue;
@@ -156,7 +156,25 @@ pub fn generate_regex(word: &str) -> String {
             }
             'u' => output.push_str("(ু|িউ|ইউ|া|আ|য়া)?"),
             'v' => output.push_str("ভ?"),
-            'w' => output.push_str("(ও|উ)?"),
+            'w' => {
+                if let Some((_, next)) = chars.peek() {
+                    let next = next.to_ascii_lowercase();
+                    // we -> ওয়ে, য়ে, ুই
+                    if next == 'e' {
+                        output.push_str("(ওয়ে|ুই|য়ে)");
+                        // Eat the 'e' character.
+                        chars.next();
+                        continue;
+                    } else if next == 'h' {
+                        // wh -> হু, হোয়
+                        output.push_str("(হু|হোয়)");
+                        // Eat the 'h' character.
+                        chars.next();
+                        continue;
+                    }
+                }
+                output.push_str("(ও|উ|ওয়)?");
+            }
             'x' => output.push_str("(ক্স|জ)?"),
             'y' => output.push_str("(ি|ই|াই|ে)"),
             'z' => output.push_str("জ?"),
@@ -232,5 +250,17 @@ mod tests {
 
         regex = Regex::new(&generate_regex("serious")).unwrap();
         assert!(regex.is_match("সিরিয়াস"));
+
+        //regex = Regex::new(&generate_regex("westminster")).unwrap();
+        //assert!(regex.is_match("ওয়েস্টমিনিস্টার"));
+
+        regex = Regex::new(&generate_regex("what")).unwrap();
+        assert!(regex.is_match("হোয়াট"));
+
+        regex = Regex::new(&generate_regex("white")).unwrap();
+        assert!(regex.is_match("হোয়াইট"));
+
+        regex = Regex::new(&generate_regex("while")).unwrap();
+        assert!(regex.is_match("হোয়াইল"));
     }
 }
