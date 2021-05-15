@@ -243,7 +243,7 @@ fn test_word_application() {
 fn test_word_lotion() {
     let regex = generate_regex("lotion");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("লোশান্‌"));
+    assert!(matcher.is_match("লোশন"));
 }
 
 #[test]
@@ -397,7 +397,7 @@ fn test_word_technology() {
 fn test_word_states() {
     let regex = generate_regex("states");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("স্টেট্‌স"));
+    assert!(matcher.is_match("স্টেটস"));
 }
 
 #[test]
@@ -520,13 +520,6 @@ fn test_word_skirt() {
 }
 
 #[test]
-fn test_word_hp() {
-    let regex = generate_regex("hp");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এইচপি"));
-}
-
-#[test]
 fn test_word_panty() {
     let regex = generate_regex("panty");
     let matcher = Regex::new(&regex).unwrap();
@@ -566,13 +559,6 @@ fn test_word_autopsy() {
     let regex = generate_regex("autopsy");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("অটোপ্সি"));
-}
-
-#[test]
-fn test_word_cd() {
-    let regex = generate_regex("cd");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সিডি"));
 }
 
 #[test]
@@ -777,13 +763,6 @@ fn test_word_year() {
     let regex = generate_regex("year");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ইয়ার"));
-}
-
-#[test]
-fn test_word_llb() {
-    let regex = generate_regex("llb");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এল.এল.বি"));
 }
 
 #[test]
@@ -1154,7 +1133,7 @@ fn test_word_fossil() {
 fn test_word_notes() {
     let regex = generate_regex("notes");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("নোট্‌স"));
+    assert!(matcher.is_match("নোটস"));
 }
 
 #[test]
@@ -1287,7 +1266,7 @@ fn test_word_presentation() {
 fn test_word_greece() {
     let regex = generate_regex("greece");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("গ্রীস"));
+    assert!(matcher.is_match("গ্রিস"));
 }
 
 #[test]
@@ -1826,7 +1805,7 @@ fn test_word_share() {
 fn test_word_fossils() {
     let regex = generate_regex("fossils");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ফসিল্‌স"));
+    assert!(matcher.is_match("ফসিলস"));
 }
 
 #[test]
@@ -1875,7 +1854,7 @@ fn test_word_tokyo() {
 fn test_word_key() {
     let regex = generate_regex("key");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কী"));
+    assert!(matcher.is_match("কি"));
 }
 
 #[test]
@@ -2197,7 +2176,7 @@ fn test_word_petrol() {
 fn test_word_health() {
     let regex = generate_regex("health");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("হেল্‌থ"));
+    assert!(matcher.is_match("হেলথ"));
 }
 
 #[test]
@@ -2215,24 +2194,10 @@ fn test_word_library() {
 }
 
 #[test]
-fn test_word_ibm() {
-    let regex = generate_regex("ibm");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("আইবিএম"));
-}
-
-#[test]
 fn test_word_crest() {
     let regex = generate_regex("crest");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ক্রেস্ট"));
-}
-
-#[test]
-fn test_word_dinman() {
-    let regex = generate_regex("dinman");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("দিনমান"));
 }
 
 #[test]
@@ -2411,13 +2376,6 @@ fn test_word_mouse() {
 }
 
 #[test]
-fn test_word_kb() {
-    let regex = generate_regex("kb");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কেবি"));
-}
-
-#[test]
 fn test_word_fixed() {
     let regex = generate_regex("fixed");
     let matcher = Regex::new(&regex).unwrap();
@@ -2506,13 +2464,6 @@ fn test_word_arab() {
     let regex = generate_regex("arab");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("আরব"));
-}
-
-#[test]
-fn test_word_hotkey() {
-    let regex = generate_regex("hotkey");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("হট-কি"));
 }
 
 #[test]
@@ -2712,13 +2663,6 @@ fn test_word_phonetic() {
 }
 
 #[test]
-fn test_word_keypad() {
-    let regex = generate_regex("keypad");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কী-প্যাড"));
-}
-
-#[test]
 fn test_word_setting() {
     let regex = generate_regex("setting");
     let matcher = Regex::new(&regex).unwrap();
@@ -2863,13 +2807,6 @@ fn test_word_military() {
     let regex = generate_regex("military");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("মিলিটারি"));
-}
-
-#[test]
-fn test_word_cm() {
-    let regex = generate_regex("cm");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সেমি."));
 }
 
 #[test]
@@ -3356,20 +3293,6 @@ fn test_word_notebook() {
 }
 
 #[test]
-fn test_word_lcd() {
-    let regex = generate_regex("lcd");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এলসিডি"));
-}
-
-#[test]
-fn test_word_dj() {
-    let regex = generate_regex("dj");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ডিজে"));
-}
-
-#[test]
 fn test_word_fuzzy() {
     let regex = generate_regex("fuzzy");
     let matcher = Regex::new(&regex).unwrap();
@@ -3430,13 +3353,6 @@ fn test_word_building() {
     let regex = generate_regex("building");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("বিল্ডিং"));
-}
-
-#[test]
-fn test_word_cpm() {
-    let regex = generate_regex("cpm");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সিপিএম"));
 }
 
 #[test]
@@ -3531,13 +3447,6 @@ fn test_word_wine() {
 }
 
 #[test]
-fn test_word_buddha() {
-    let regex = generate_regex("buddha");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("বুদ্ধ"));
-}
-
-#[test]
 fn test_word_monitor() {
     let regex = generate_regex("monitor");
     let matcher = Regex::new(&regex).unwrap();
@@ -3556,13 +3465,6 @@ fn test_word_event() {
     let regex = generate_regex("event");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ইভেন্ট"));
-}
-
-#[test]
-fn test_word_bodrag() {
-    let regex = generate_regex("bodrag");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("বদরাগ"));
 }
 
 #[test]
@@ -3598,13 +3500,6 @@ fn test_word_documents() {
     let regex = generate_regex("documents");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ডকুমেন্টস"));
-}
-
-#[test]
-fn test_word_lg() {
-    let regex = generate_regex("lg");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এলজি"));
 }
 
 #[test]
@@ -3674,7 +3569,7 @@ fn test_word_friend() {
 fn test_word_february() {
     let regex = generate_regex("february");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ফেব্রুয়ারী"));
+    assert!(matcher.is_match("ফেব্রুয়ারি"));
 }
 
 #[test]
@@ -3993,13 +3888,6 @@ fn test_word_cream() {
 }
 
 #[test]
-fn test_word_lbw() {
-    let regex = generate_regex("lbw");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এলবিডব্লিউ"));
-}
-
-#[test]
 fn test_word_draft() {
     let regex = generate_regex("draft");
     let matcher = Regex::new(&regex).unwrap();
@@ -4108,7 +3996,7 @@ fn test_word_cross() {
 fn test_word_maths() {
     let regex = generate_regex("maths");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ম্যাথ্‌স"));
+    assert!(matcher.is_match("ম্যাথস"));
 }
 
 #[test]
@@ -4203,13 +4091,6 @@ fn test_word_sound() {
 }
 
 #[test]
-fn test_word_atm() {
-    let regex = generate_regex("atm");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এটিএম"));
-}
-
-#[test]
 fn test_word_byte() {
     let regex = generate_regex("byte");
     let matcher = Regex::new(&regex).unwrap();
@@ -4262,14 +4143,14 @@ fn test_word_united() {
 fn test_word_rights() {
     let regex = generate_regex("rights");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("রাইট্‌স"));
+    assert!(matcher.is_match("রাইটস"));
 }
 
 #[test]
 fn test_word_baseball() {
     let regex = generate_regex("baseball");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("বেস্‌বল"));
+    assert!(matcher.is_match("বেসবল"));
 }
 
 #[test]
@@ -4277,13 +4158,6 @@ fn test_word_luxury() {
     let regex = generate_regex("luxury");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("লাক্সারি"));
-}
-
-#[test]
-fn test_word_km() {
-    let regex = generate_regex("km");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("কিমি."));
 }
 
 #[test]
@@ -4416,7 +4290,7 @@ fn test_word_logic() {
 fn test_word_gates() {
     let regex = generate_regex("gates");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("গেট্‌স"));
+    assert!(matcher.is_match("গেটস"));
 }
 
 #[test]
@@ -4626,7 +4500,7 @@ fn test_word_account() {
 fn test_word_jeans() {
     let regex = generate_regex("jeans");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("জিন্‌স"));
+    assert!(matcher.is_match("জিনস"));
 }
 
 #[test]
@@ -4703,14 +4577,14 @@ fn test_word_december() {
 fn test_word_options() {
     let regex = generate_regex("options");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("অপশন্‌স"));
+    assert!(matcher.is_match("অপশনস"));
 }
 
 #[test]
 fn test_word_tourism() {
     let regex = generate_regex("tourism");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ট্যুরিজ্‌ম"));
+    assert!(matcher.is_match("ট্যুরিজম"));
 }
 
 #[test]
@@ -4858,13 +4732,6 @@ fn test_word_earth() {
     let regex = generate_regex("earth");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("আর্থ"));
-}
-
-#[test]
-fn test_word_cpi() {
-    let regex = generate_regex("cpi");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সিপিআই"));
 }
 
 #[test]
@@ -5113,17 +4980,10 @@ fn test_word_prize() {
 }
 
 #[test]
-fn test_word_delhi() {
-    let regex = generate_regex("delhi");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("দিল্লি"));
-}
-
-#[test]
 fn test_word_january() {
     let regex = generate_regex("january");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("জানুয়ারী"));
+    assert!(matcher.is_match("জানুয়ারি"));
 }
 
 #[test]
@@ -5151,7 +5011,7 @@ fn test_word_apply() {
 fn test_word_caps() {
     let regex = generate_regex("caps");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ক্যাপ্‌স"));
+    assert!(matcher.is_match("ক্যাপস"));
 }
 
 #[test]
@@ -5176,24 +5036,10 @@ fn test_word_wireless() {
 }
 
 #[test]
-fn test_word_dur() {
-    let regex = generate_regex("dur");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("দূর"));
-}
-
-#[test]
 fn test_word_india() {
     let regex = generate_regex("india");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ইন্ডিয়া"));
-}
-
-#[test]
-fn test_word_pargana() {
-    let regex = generate_regex("pargana");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("পরগণা"));
 }
 
 #[test]
@@ -5389,7 +5235,7 @@ fn test_word_newspaper() {
 fn test_word_nonsense() {
     let regex = generate_regex("nonsense");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("নন্‌সেন্স"));
+    assert!(matcher.is_match("ননসেন্স"));
 }
 
 #[test]
@@ -5684,7 +5530,7 @@ fn test_word_engine() {
 fn test_word_greenland() {
     let regex = generate_regex("greenland");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("গ্রীনল্যান্ড"));
+    assert!(matcher.is_match("গ্রিনল্যান্ড"));
 }
 
 #[test]
@@ -5782,7 +5628,7 @@ fn test_word_driver() {
 fn test_word_pulse() {
     let regex = generate_regex("pulse");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("পাল্‌স"));
+    assert!(matcher.is_match("পালস"));
 }
 
 #[test]
@@ -5919,13 +5765,6 @@ fn test_word_biochemistry() {
 }
 
 #[test]
-fn test_word_etc() {
-    let regex = generate_regex("etc");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("ইত্যাদি"));
-}
-
-#[test]
 fn test_word_anatomy() {
     let regex = generate_regex("anatomy");
     let matcher = Regex::new(&regex).unwrap();
@@ -5978,7 +5817,7 @@ fn test_word_electronics() {
 fn test_word_settings() {
     let regex = generate_regex("settings");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সেটিংস্‌"));
+    assert!(matcher.is_match("সেটিংস"));
 }
 
 #[test]
@@ -6031,13 +5870,6 @@ fn test_word_chemistry() {
 }
 
 #[test]
-fn test_word_sot() {
-    let regex = generate_regex("sot");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সৎ"));
-}
-
-#[test]
 fn test_word_minus() {
     let regex = generate_regex("minus");
     let matcher = Regex::new(&regex).unwrap();
@@ -6063,6 +5895,8 @@ fn test_word_insurance() {
     let regex = generate_regex("insurance");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("ইনসিওরেন্স"));
+    assert!(matcher.is_match("ইন্স্যুরেন্স"));
+    assert!(matcher.is_match("ইন্সুরেন্স"));
 }
 
 #[test]

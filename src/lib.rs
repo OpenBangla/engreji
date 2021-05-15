@@ -11,7 +11,7 @@ pub fn generate_regex(word: &str) -> String {
                     output.push_str("(আ|অ্যা|অ|এ)?");
                     continue;
                 }
-                output.push_str("(\u{9cd}য\u{9be}|\u{9be}|ে|য়ে|য়\u{9be}|েই)?");
+                output.push_str("(\u{9cd}য\u{9be}|\u{9be}|ে|য়ে|েয়|য়\u{9be}|েই)?");
             }
             'b' => output.push_str("ব?"),
             'c' => {
@@ -25,7 +25,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     } else if next == 'h' {
                         // ch -> চ
-                        output.push_str("চ|ক");
+                        output.push_str("চ|ক|শ");
                         // Eat the 'h' character.
                         chars.next();
                         continue;
@@ -33,18 +33,18 @@ pub fn generate_regex(word: &str) -> String {
                 }
                 output.push_str("(ক|স|শ)?");
             }
-            'd' => output.push_str("(ড)?"),
+            'd' => output.push_str("(ড|জ)?"),
             'e' => {
                 // earth -> আর্থ
                 if index == 0 {
                     output.push_str("(আ)?");
                 }
-                output.push_str("(ে|ি|া|ই|এ|য়)?");
+                output.push_str("(ে|ি|া|ই|এ|য়|য়ে)?");
             }
             'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
-            'i' => output.push_str("(ই|ি|া|াই|ে|আই|য়াই)?"),
+            'i' => output.push_str("(ই|ি|া|াই|ে|আই|য়াই|আয়)?"),
             'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
             'l' => {
@@ -80,6 +80,11 @@ pub fn generate_regex(word: &str) -> String {
                         // Eat the 'k' character.
                         chars.next();
                         continue;
+                    } else if next == 'c' || next == 't' {
+                        // nc -> ঞ্, ঙ্ -> ঞ্চ, ঙ্ক
+                        output.push_str("(ন|ঞ|ঙ)?\u{9cd}?");
+                        // We don't eat the next 'c' character.
+                        continue;
                     }
                 }
                 output.push_str("ন?");
@@ -95,7 +100,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     } else if next == 'w' {
                         // ow
-                        output.push_str("(াউ|ো|য়াও)?");
+                        output.push_str("(াউ|ো|য়াও|াওয়)?");
                         // Eat the 'w' character.
                         chars.next();
                         continue;
@@ -116,7 +121,7 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("প?");
             }
             'q' => output.push_str("ক"),
-            'r' => output.push_str("(র|্র|র্|র\u{200d}|ার)?"),
+            'r' => output.push_str("(র|্র|র্|র\u{200d}|ার|য়ার)?"),
             's' => {
                 // sion -> শন, সন
                 if let Some(next) = word.get(index..=index+3) {
@@ -152,16 +157,16 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     }
                 }
-                output.push_str("(ট|চ)?");
+                output.push_str("(ট|ত|চ)?");
             }
-            'u' => output.push_str("(ু|িউ|ইউ|া|আ|য়া)?"),
+            'u' => output.push_str("(ু|িউ|িও|ইউ|া|ো|আ|য়া)?"),
             'v' => output.push_str("ভ?"),
             'w' => {
                 if let Some((_, next)) = chars.peek() {
                     let next = next.to_ascii_lowercase();
                     // we -> ওয়ে, য়ে, ুই
                     if next == 'e' {
-                        output.push_str("(ওয়ে|ুই|য়ে)");
+                        output.push_str("(ওয়ে|োয়ে|ুই|য়ে)");
                         // Eat the 'e' character.
                         chars.next();
                         continue;
@@ -171,12 +176,18 @@ pub fn generate_regex(word: &str) -> String {
                         // Eat the 'h' character.
                         chars.next();
                         continue;
+                    } else if next == 'i' {
+                        // wi -> ওয়াই, ুই
+                        output.push_str("(উই|ওয়াই|ুই|ওয়)");
+                        // Eat the 'i' character.
+                        chars.next();
+                        continue;
                     }
                 }
                 output.push_str("(ও|উ|ওয়)?");
             }
             'x' => output.push_str("(ক্স|জ)?"),
-            'y' => output.push_str("(ি|ই|াই|ে)"),
+            'y' => output.push_str("(ি|ই|াই|ে|য়)"),
             'z' => output.push_str("জ?"),
             _ => ()
         }
@@ -262,5 +273,17 @@ mod tests {
 
         regex = Regex::new(&generate_regex("while")).unwrap();
         assert!(regex.is_match("হোয়াইল"));
+
+        regex = Regex::new(&generate_regex("wife")).unwrap();
+        assert!(regex.is_match("ওয়াইফ"));
+
+        regex = Regex::new(&generate_regex("wire")).unwrap();
+        assert!(regex.is_match("ওয়ার"));
+
+        regex = Regex::new(&generate_regex("wild")).unwrap();
+        assert!(regex.is_match("ওয়াইল্ড"));
+
+        regex = Regex::new(&generate_regex("cinchona")).unwrap();
+        assert!(regex.is_match("সিঙ্কোনা"));
     }
 }
