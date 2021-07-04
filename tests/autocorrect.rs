@@ -208,7 +208,7 @@ fn test_word_video() {
 fn test_word_entries() {
     let regex = generate_regex("entries");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এন্ট্রিজ্‌"));
+    assert!(matcher.is_match("এন্ট্রিজ"));
 }
 
 #[test]
@@ -4955,7 +4955,7 @@ fn test_word_plate() {
 fn test_word_emirates() {
     let regex = generate_regex("emirates");
     let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("এমিরেট্‌স"));
+    assert!(matcher.is_match("এমিরেটস"));
 }
 
 #[test]
@@ -5503,13 +5503,6 @@ fn test_word_business() {
     let regex = generate_regex("business");
     let matcher = Regex::new(&regex).unwrap();
     assert!(matcher.is_match("বিজনেস"));
-}
-
-#[test]
-fn test_word_singh() {
-    let regex = generate_regex("singh");
-    let matcher = Regex::new(&regex).unwrap();
-    assert!(matcher.is_match("সিংহ"));
 }
 
 #[test]

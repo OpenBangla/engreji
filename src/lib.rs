@@ -44,7 +44,7 @@ pub fn generate_regex(word: &str) -> String {
             'f' => output.push_str("ফ?"),
             'g' => output.push_str("(গ|জ)?"),
             'h' => output.push_str("(হ)?"),
-            'i' => output.push_str("(ই|ি|া|াই|ে|আই|য়াই|আয়)?"),
+            'i' => output.push_str("(ই|ি|া|াই|ে|আই|য়াই|ায়|আয়)?"),
             'j' => output.push_str("জ?"),
             'k' => output.push_str("(ক)"),
             'l' => {
@@ -65,7 +65,7 @@ pub fn generate_regex(word: &str) -> String {
                     let next = next.to_ascii_lowercase();
                     // ng -> ং, ঙ্গ, ঞ্জ
                     if next == 'g' {
-                        output.push_str("(ং|ঙ্গ|ঞ্জ)");
+                        output.push_str("(ং|ঙ্গ|ঞ্জ|ংগ)");
                         // Eat the 'g' character.
                         chars.next();
                         continue;
@@ -159,7 +159,7 @@ pub fn generate_regex(word: &str) -> String {
                 }
                 output.push_str("(ট|ত|চ)?");
             }
-            'u' => output.push_str("(ু|িউ|িও|ইউ|া|ো|আ|য়া)?"),
+            'u' => output.push_str("(ু|িউ|িও|ইউ|ি|া|ো|আ|য়া)?"),
             'v' => output.push_str("ভ?"),
             'w' => {
                 if let Some((_, next)) = chars.peek() {
@@ -178,7 +178,7 @@ pub fn generate_regex(word: &str) -> String {
                         continue;
                     } else if next == 'i' {
                         // wi -> ওয়াই, ুই
-                        output.push_str("(উই|ওয়াই|ুই|ওয়)");
+                        output.push_str("(উই|ওয়াই|ুই|ওয়|য়ি)");
                         // Eat the 'i' character.
                         chars.next();
                         continue;
@@ -187,7 +187,7 @@ pub fn generate_regex(word: &str) -> String {
                 output.push_str("(ও|উ|ওয়)?");
             }
             'x' => output.push_str("(ক্স|জ)?"),
-            'y' => output.push_str("(ি|ই|াই|ে|য়)"),
+            'y' => output.push_str("(ি|ই|াই|ে|য়|া)"),
             'z' => output.push_str("জ?"),
             _ => ()
         }
@@ -262,8 +262,8 @@ mod tests {
         regex = Regex::new(&generate_regex("serious")).unwrap();
         assert!(regex.is_match("সিরিয়াস"));
 
-        //regex = Regex::new(&generate_regex("westminster")).unwrap();
-        //assert!(regex.is_match("ওয়েস্টমিনিস্টার"));
+        regex = Regex::new(&generate_regex("westminster")).unwrap();
+        assert!(regex.is_match("ওয়েস্টমিনস্টার"));
 
         regex = Regex::new(&generate_regex("what")).unwrap();
         assert!(regex.is_match("হোয়াট"));
@@ -285,5 +285,11 @@ mod tests {
 
         regex = Regex::new(&generate_regex("cinchona")).unwrap();
         assert!(regex.is_match("সিঙ্কোনা"));
+
+        regex = Regex::new(&generate_regex("congratulation")).unwrap();
+        assert!(regex.is_match("কংগ্রাচুলেশন"));
+
+        regex = Regex::new(&generate_regex("paranoia")).unwrap();
+        assert!(regex.is_match("প্যারানয়া"));
     }
 }
